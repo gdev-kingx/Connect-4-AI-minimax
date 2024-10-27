@@ -36,13 +36,13 @@ def winning_move(board, piece):
 			if board[r][c] == piece and board[r+1][c] == piece and board[r+2][c] == piece and board[r+3][c] == piece:
 				return True
 
-	# Check positively sloped diaganols
+	# Check positively sloped diagonals
 	for c in range(COL_COUNT-3):
 		for r in range(ROW_COUNT-3):
 			if board[r][c] == piece and board[r+1][c+1] == piece and board[r+2][c+2] == piece and board[r+3][c+3] == piece:
 				return True
 
-	# Check negatively sloped diaganols
+	# Check negatively sloped diagonals
 	for c in range(COL_COUNT-3):
 		for r in range(3, ROW_COUNT):
 			if board[r][c] == piece and board[r-1][c+1] == piece and board[r-2][c+2] == piece and board[r-3][c+3] == piece:
@@ -223,7 +223,7 @@ while not game_over:
 
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			pygame.draw.rect(screen, BLACK, (0,0, width, SQSIZE))
-			#print(event.pos)
+
 			# Ask for Player 1 Input
 			if turn == PLAYER:
 				posx = event.pos[0]
@@ -248,12 +248,9 @@ while not game_over:
 	# # Ask for Player 2 Input
 	if turn == AI and not game_over:				
 
-		#col = random.randint(0, COL_COUNT-1)
-		#col = pick_best_move(board, AI_PIECE)
 		col, minimax_score = minimax(board, 5, -math.inf, math.inf, True)
 
 		if is_valid_location(board, col):
-			#pygame.time.wait(500)
 			row = get_next_open_row(board, col)
 			drop_piece(board, row, col, AI_PIECE)
 
